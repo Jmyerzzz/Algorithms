@@ -12,9 +12,8 @@ public class Select {
         while ( s != null ) { // while not end-of-file
             numList.add(Integer.parseInt(s));
             s = stdIn.readLine(); // grab the next line (or null)
-            System.out.println(numList.get(i));
         }
-
+				findKthLargest(numList, Integer.parseInt(args[0]));
 		}
 
     public static int findKthLargest (ArrayList<Integer> numList, int k) {
@@ -27,9 +26,13 @@ public class Select {
 			pivotIndex = partition(numList, 0, numList.size() - 1);
 
 			if ((k-1) < pivotIndex) {
+
 				return findKthLargest(numList.sublist(0, pivotIndex), k);
+
 			} else if ((k-1) > pivotIndex) {
-				return findKthLargest(numList.sublist(pivotIndex + 1, numList.size() - 1), k);
+
+				return findKthLargest(numList.sublist(pivotIndex + 1, numList.size() - 1), (k-1)-pivotIndex);
+
 			} else {
 				return numList.get(k-1);
 			}
